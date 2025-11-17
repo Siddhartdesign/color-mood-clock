@@ -3,66 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Big Time Clock</title>
+<title>Clock by Sid</title>
 
 <!-- MODAK Typeface -->
 <link href="https://fonts.googleapis.com/css2?family=Modak&display=swap" rel="stylesheet">
 
 <style>
     body {
-        margin: 0;
-        height: 100vh;
         background: black;
-        color: white;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    #clock {
         font-family: 'Modak', cursive;
+        font-size: 22vw;
+        line-height: 1;
+        transition: color 0.5s ease;
     }
 
-    .clock {
-        font-size: 22vw; /* Even BIGGER for Modak */
-        letter-spacing: -0.05em;
-        display: flex;
-        gap: 0.04em;
-    }
-
-    .seconds {
-        display: inline-block;
-        width: 0.8em;
-        text-align: center;
-        animation: pulse 1s linear infinite;
-    }
-
-    /* Animation for seconds reset */
-    @keyframes pulse {
-        0%   { opacity: 1; transform: scale(1); }
-        60%  { opacity: 0; transform: scale(0.85); }
-        100% { opacity: 1; transform: scale(1); }
+    #caption {
+        margin-top: 20px;
+        font-family: sans-serif;
+        font-size: 18px;
+        color: white;
+        opacity: 0.75;
     }
 </style>
-
 </head>
 
 <body>
 
-<div class="clock">
-    <span id="hours">00</span>:
-    <span id="minutes">00</span>:
-    <span id="seconds" class="seconds">00</span>
-</div>
+<div id="clock">00:00:00</div>
+<div id="caption">Created by Sid</div>
 
 <script>
-function updateClock() {
-    let now = new Date();
+function randomColor() {
+    return "hsl(" + Math.floor(Math.random() * 360) + ", 90%, 60%)";
+}
 
+function updateClock() {
+    const now = new Date();
     let h = String(now.getHours()).padStart(2, '0');
     let m = String(now.getMinutes()).padStart(2, '0');
     let s = String(now.getSeconds()).padStart(2, '0');
 
-    document.getElementById("hours").textContent = h;
-    document.getElementById("minutes").textContent = m;
-    document.getElementById("seconds").textContent = s;
+    document.getElementById("clock").innerText = `${h}:${m}:${s}`;
+    document.getElementById("clock").style.color = randomColor();
 }
 
 setInterval(updateClock, 1000);

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Mood Clock</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 1s;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2em;
+      max-width: 80%;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="quote">Loading...</h1>
+
+  <script>
+    // === Step 1: Define your color + quote for each minute ===
+    const moods = {
+      0:  {color: "#FF5733", quote: "Start fresh"},
+      1:  {color: "#33FFBD", quote: "Keep moving"},
+      2:  {color: "#335BFF", quote: "Focus on now"},
+      3:  {color: "#FF33A1", quote: "Small steps count"},
+      4:  {color: "#FFD133", quote: "Breathe deeply"},
+      5:  {color: "#33FF57", quote: "Find beauty"},
+      6:  {color: "#A833FF", quote: "Stay curious"},
+      // ... continue filling up to 59 minutes
+      59: {color: "#335BFF", quote: "Almost done"}
+    };
+
+    // === Step 2: Function to update background + text ===
+    function updateMood() {
+      const now = new Date();
+      const minute = now.getMinutes();
+      const mood = moods[minute] || {color: "#333333", quote: "Enjoy your moment"};
+      document.body.style.backgroundColor = mood.color;
+      document.getElementById('quote').innerText = mood.quote;
+    }
+
+    // === Step 3: Update every minute ===
+    updateMood(); // initial load
+    setInterval(updateMood, 60000); // update every minute
+  </script>
+</body>
+</html>
